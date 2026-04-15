@@ -1,0 +1,157 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Cities - Gabriella Luoma</title> 
+  <link rel="stylesheet" href="css/citystyles.css"> 
+</head> 
+ 
+<body id="top"> 
+ 
+  <div class="header"> 
+    <div class="topnav"> 
+      <a href="index.html">Home</a> | 
+      <a href="Resume.html">Resume</a> | 
+      <a href="Cities.html">Cities</a> | 
+      <a href="Game.html">Game</a> 
+    </div> 
+ 
+    <div class="subnav"> 
+      <a href="#NewYorkCity">New York City</a> | 
+      <a href="#Chicago">Chicago</a> | 
+      <a href="#Houston">Houston, Texas</a> 
+    </div> 
+  </div> 
+ 
+  <div class="hero"> 
+    <h1>Cities</h1> 
+    <h2>Cities I Want to Visit</h2> 
+  </div> 
+ 
+  <div class="maincontent"> 
+    <ol class="main-list"> 
+ 
+      <li id="NewYorkCity">New York City, New York 
+        <ul> 
+          <li>Times Square 
+            <ul> 
+              <li>I want to go there after I graduate BYU</li> 
+              <li>Things I love to do there: 
+                <ol> 
+                  <li>Shopping</li> 
+                  <li>Seeing Broadway shows</li> 
+                  <li>Going to the Empire State Building</li> 
+                  <li>Walking through Central Park</li> 
+                  <li>Enjoying the vibrant nightlife</li> 
+                </ol> 
+              </li> 
+            </ul> 
+          </li> 
+        </ul> 
+ 
+        <div class="photo-box"> 
+          <img src="images/TimesSquare.jpg" alt="Times Square"> 
+        </div> 
+      </li> 
+ 
+      <li id="Chicago">Chicago, Illinois 
+        <ul> 
+          <li>Chicago River
+            <ul> 
+              <li>I want to go next summer</li> 
+              <li>Things I love to do there: 
+                <ol> 
+                  <li>Visiting the Art Institute of Chicago</li> 
+                  <li>Exploring the vibrant neighborhoods</li> 
+                  <li>Enjoying the famous deep-dish pizza</li> 
+                  <li>Taking a boat tour on Lake Michigan</li> 
+                  <li>Visiting the Willis Tower</li> 
+                </ol> 
+              </li> 
+            </ul> 
+          </li> 
+        </ul> 
+ 
+        <div class="photo-box"> 
+          <img src="images/ChicagoRiver.jpg" alt="Chicago River"> 
+        </div> 
+      </li>
+ 
+      <li id="Houston">Houston, Texas 
+        <ul> 
+          <li>Space Center Houston
+            <ul> 
+              <li>This is my hometown beach.</li> 
+              <li>Why I love this beach: 
+                <ol> 
+                  <li>Close to home</li> 
+                  <li>Beautiful sunsets</li> 
+                  <li>So many shells to collect</li> 
+                  <li>Nice waves</li> 
+                  <li>So many dolphins to see</li> 
+                </ol> 
+              </li> 
+            </ul> 
+          </li> 
+        </ul> 
+ 
+        <div class="photo-box"> 
+          <img src="images/SpaceCenter.jpg" alt="Space Center Houston"> 
+        </div> 
+      </li> 
+    </ol> 
+ 
+    <div class="video-section"> 
+      <h3>Space Video</h3> 
+      <iframe width="560" height="315" 
+        src="https://www.youtube.com/embed/KyZqSWWKmHQ" 
+        title="Space Center Houston Tour"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen> 
+      </iframe> 
+    </div>
+
+    <section class="tableau-section">
+      <div class="tableau-box">
+        <h2>Interactive Tableau Visualization</h2>
+        <p>Explore this live Tableau graph below.</p>
+
+        <div class="tableauPlaceholder" id="viz1744750000000" style="position: relative;">
+          <noscript>
+            <a href="#">
+              <img alt="Tableau Visualization"
+                   src="https://public.tableau.com/static/images/Re/RegionalSampleWorkbook/College/1_rss.png"
+                   style="border: none; width: 100%; max-width: 100%;" />
+            </a>
+          </noscript>
+          <object class="tableauViz" style="display:none;">
+            <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
+            <param name="embed_code_version" value="3" />
+            <param name="site_root" value="" />
+            <param name="name" value="RegionalSampleWorkbook/College" />
+            <param name="tabs" value="no" />
+            <param name="toolbar" value="yes" />
+            <param name="showVizHome" value="n" />
+          </object>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <script type="text/javascript">
+    var divElement = document.getElementById('viz1744750000000');
+    var vizElement = divElement.getElementsByTagName('object')[0];
+    vizElement.style.width = '100%';
+    vizElement.style.maxWidth = '100%';
+    vizElement.style.height = '700px';
+
+    var scriptElement = document.createElement('script');
+    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+  </script>
+
+</body>
+</html>

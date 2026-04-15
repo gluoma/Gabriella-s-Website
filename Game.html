@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Christmas Guessing Game</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+      background:
+        linear-gradient(rgba(0, 40, 0, 0.45), rgba(80, 0, 0, 0.45)),
+        url("https://images.unsplash.com/photo-1512389142860-9c449e58a543?auto=format&fit=crop&w=1600&q=80")
+        no-repeat center center/cover;
+      color: white;
+    }
+
+    /* Navigation */
+    .navbar {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      background: rgba(25, 25, 25, 0.85);
+      padding: 18px 22px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    .navbar a {
+      display: block;
+      color: #ffe66d;
+      text-decoration: none;
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin: 8px 0;
+      transition: 0.2s ease;
+    }
+
+    .navbar a:hover {
+      color: #ffffff;
+      transform: translateX(4px);
+    }
+
+    /* Main game area */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .game-box {
+      width: 100%;
+      max-width: 700px;
+      background: rgba(0, 0, 0, 0.65);
+      border-radius: 24px;
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(5px);
+    }
+
+    .game-box h1 {
+      font-size: 3rem;
+      color: #ffef6f;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .game-box p {
+      font-size: 1.2rem;
+      margin: 14px 0;
+      line-height: 1.6;
+    }
+
+    .instructions {
+      color: #f5f5f5;
+      margin-bottom: 25px;
+    }
+
+    .input-group {
+      margin: 20px 0;
+    }
+
+    input[type="number"] {
+      width: 220px;
+      padding: 14px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 12px;
+      text-align: center;
+      outline: none;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 14px 26px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #e63946;
+      color: white;
+      font-weight: bold;
+      transition: 0.2s ease;
+    }
+
+    button:hover {
+      background: #c1121f;
+      transform: scale(1.03);
+    }
+
+    .secondary-btn {
+      background: #2a9d8f;
+      margin-left: 10px;
+    }
+
+    .secondary-btn:hover {
+      background: #1f7f73;
+    }
+
+    #message {
+      margin-top: 25px;
+      font-size: 1.4rem;
+      font-weight: bold;
+      min-height: 40px;
+    }
+
+    .stats {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      color: #fff3cd;
+    }
+
+    .christmas-emoji {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        position: static;
+        width: fit-content;
+        margin: 20px auto 0;
+      }
+
+      .hero {
+        padding-top: 20px;
+      }
+
+      .game-box h1 {
+        font-size: 2.2rem;
+      }
+
+      input[type="number"] {
+        width: 100%;
+        max-width: 260px;
+      }
+
+      button,
+      .secondary-btn {
+        display: block;
+        width: 100%;
+        max-width: 260px;
+        margin: 12px auto 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="resume.html">Resume</a>
+    <a href="cities.html">Cities</a>
+    <a href="game.html">Game</a>
+  </nav>
+
+  <!-- Game -->
+  <main class="hero">
+    <section class="game-box">
+      <div class="christmas-emoji">🎄🎅🎁❄️</div>
+      <h1>Christmas Number Guessing Game</h1>
+      <p class="instructions">
+        I’m thinking of a number between <strong>1 and 100</strong>.
+        Can you guess it before you run out of tries?
+      </p>
+
+      <div class="input-group">
+        <input type="number" id="guessInput" min="1" max="100" placeholder="Enter your guess" />
+        <br />
+        <button onclick="checkGuess()">Guess</button>
+        <button class="secondary-btn" onclick="resetGame()">Play Again</button>
+      </div>
+
+      <div id="message">Make your first guess!</div>
+
+      <div class="stats">
+        <p>Guesses Left: <span id="guessesLeft">7</span></p>
+        <p>Previous Guesses: <span id="previousGuesses">None</span></p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    let secretNumber = Math.floor(Math.random() * 100) + 1;
+    let guessesLeft = 7;
+    let previousGuesses = [];
+
+    function checkGuess() {
+      const input = document.getElementById("guessInput");
+      const message = document.getElementById("message");
+      const guessesLeftDisplay = document.getElementById("guessesLeft");
+      const previousGuessesDisplay = document.getElementById("previousGuesses");
+
+      const userGuess = Number(input.value);
+
+      if (!userGuess || userGuess < 1 || userGuess > 100) {
+        message.textContent = "🎄 Please enter a number between 1 and 100.";
+        return;
+      }
+
+      if (previousGuesses.includes(userGuess)) {
+        message.textContent = "❄️ You already guessed that number. Try a different one!";
+        return;
+      }
+
+      previousGuesses.push(userGuess);
+      guessesLeft--;
+
+      previousGuessesDisplay.textContent = previousGuesses.join(", ");
+      guessesLeftDisplay.textContent = guessesLeft;
+
+      if (userGuess === secretNumber) {
+        message.textContent = `🎉 You got it! The number was ${secretNumber}. Merry Christmas!`;
+        disableGame();
+      } else if (guessesLeft === 0) {
+        message.textContent = `🎅 Out of guesses! The number was ${secretNumber}. Try again!`;
+        disableGame();
+      } else if (userGuess < secretNumber) {
+        message.textContent = "⬆️ Too low! Guess higher.";
+      } else {
+        message.textContent = "⬇️ Too high! Guess lower.";
+      }
+
+      input.value = "";
+      input.focus();
+    }
+
+    function disableGame() {
+      document.getElementById("guessInput").disabled = true;
+    }
+
+    function resetGame() {
+      secretNumber = Math.floor(Math.random() * 100) + 1;
+      guessesLeft = 7;
+      previousGuesses = [];
+
+      document.getElementById("guessInput").disabled = false;
+      document.getElementById("guessInput").value = "";
+      document.getElementById("guessesLeft").textContent = guessesLeft;
+      document.getElementById("previousGuesses").textContent = "None";
+      document.getElementById("message").textContent = "Make your first guess!";
+      document.getElementById("guessInput").focus();
+    }
+
+    // Let user press Enter to submit guess
+    document.getElementById("guessInput").addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        checkGuess();
+      }
+    });
+  </script>
+</body>
+</html>
